@@ -40,10 +40,8 @@ const Nav = () => {
 
   const controlNavbar = () => {
     if (window.scrollY > lastScrollY) {
-      // Scroll Down
       setShowNavbar(false);
     } else {
-      // Scroll Up
       setShowNavbar(true);
     }
     setLastScrollY(window.scrollY);
