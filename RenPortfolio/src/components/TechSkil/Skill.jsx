@@ -28,7 +28,10 @@ const Skills = () => {
   return (
     <div>
       {/* Title Section */}
-      <section className="h-80 pt-32 relative bg-gradient-to-b from-[#0c0429] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
+      <section
+        id="Skills"
+        className="h-80 pt-32 relative bg-gradient-to-b from-[#0c0429] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden"
+      >
         {/* Logo animation */}
         <motion.div
           className="absolute inset-0 flex items-center justify-start text-center text-white text-[32px] sm:text-[64px] font-bold opacity-10 whitespace-nowrap"

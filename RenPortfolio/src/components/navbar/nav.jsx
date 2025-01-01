@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { HashLink as Link } from "react-router-hash-link";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
@@ -29,11 +30,11 @@ const Nav = () => {
   );
 
   let Links = [
-    { name: "Home", link: "/hero" },
-    { name: "section2", link: "/" },
-    { name: "section3", link: "/" },
-    { name: "section4", link: "/" },
-    { name: "section5", link: "/" },
+    { name: "Home", link: "#hero" },
+    { name: "My Work", link: "#Projects" },
+    { name: "Collaborations", link: "#Collaborations" },
+    { name: "Skills", link: "#Skills" },
+    { name: "Contact", link: "#contact" },
   ];
 
   const controlNavbar = () => {
@@ -80,12 +81,13 @@ const Nav = () => {
         >
           {Links.map((link) => (
             <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7 group">
-              <a
-                href={link.link}
+              <Link
+                smooth
+                to={link.link}
                 className="relative text-slate-300 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r from-violet-400 to-blue-300  duration-500 after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-violet-400 after:to-blue-300 after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform after:duration-500"
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

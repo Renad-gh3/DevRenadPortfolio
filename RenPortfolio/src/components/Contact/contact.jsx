@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-
+import "../../index.css";
 const Contact = () => {
   const form = useRef();
-  const [showNotification, setShowNotification] = useState(false); // To control the notification visibility
+  const [showNotification, setShowNotification] = useState(false);
   const [errors, setErrors] = useState({
     user_name: "",
     user_email: "",
@@ -14,12 +14,10 @@ const Contact = () => {
   const validateForm = () => {
     const newErrors = { user_name: "", user_email: "", message: "" };
 
-    // Check if name is empty
     if (!form.current.user_name.value) {
       newErrors.user_name = "Name is required";
     }
 
-    // Check if email is valid
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.current.user_email.value) {
       newErrors.user_email = "Email is required";
@@ -27,14 +25,11 @@ const Contact = () => {
       newErrors.user_email = "Please enter a valid email address";
     }
 
-    // Check if message is empty
     if (!form.current.message.value) {
       newErrors.message = "Message is required";
     }
 
     setErrors(newErrors);
-
-    // Return true if there are no errors
     return !Object.values(newErrors).some((error) => error);
   };
 
@@ -42,7 +37,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      return; // Do not send email if there are validation errors
+      return;
     }
 
     emailjs
@@ -55,8 +50,8 @@ const Contact = () => {
       .then(
         (result) => {
           console.log(result.text);
-          setShowNotification(true); // Show notification on success
-          setTimeout(() => setShowNotification(false), 3000); // Hide after 3 seconds
+          setShowNotification(true);
+          setTimeout(() => setShowNotification(false), 3000);
         },
         (error) => {
           console.log(error.text);
@@ -65,10 +60,14 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div id="contact" className="relative">
+      {/* Background with glowing dots */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[#000000] via-[#0c0429] to-[#3f4078] overflow-hidden">
+        <div className="glowing-dots"></div>
+      </div>
+
       {/* Section for the title */}
       <section className="h-80 pt-32 relative bg-gradient-to-b from-[#0c0429] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
-        {/* Moving background text */}
         <motion.div
           className="absolute inset-0 flex items-center justify-start text-center text-white text-[64px] sm:text-[128px] font-bold opacity-10 whitespace-nowrap"
           initial={{ x: "100%" }}
@@ -81,8 +80,6 @@ const Contact = () => {
         >
           Contact me Contact me Contact me Contact me
         </motion.div>
-
-        {/* Foreground title */}
         <motion.h1 className="relative text-white text-[32px] sm:text-[56px] font-bold text-shadow z-10">
           Contact me
         </motion.h1>
@@ -92,7 +89,6 @@ const Contact = () => {
       <section className="py-16 px-8 bg-gradient-to-t from-[#0c0429] via-[#0c0429] to-[#3f4078] flex justify-center items-center">
         <div className="w-full max-w-md p-8 rounded-lg shadow-lg">
           <form ref={form} onSubmit={sendEmail} className="space-y-6">
-            {/* Name field */}
             <div>
               <input
                 type="text"
@@ -106,7 +102,6 @@ const Contact = () => {
               )}
             </div>
 
-            {/* Email field */}
             <div>
               <input
                 type="email"
@@ -120,7 +115,6 @@ const Contact = () => {
               )}
             </div>
 
-            {/* Message field */}
             <div>
               <textarea
                 id="message"
@@ -134,7 +128,6 @@ const Contact = () => {
               )}
             </div>
 
-            {/* Submit button */}
             <motion.button className="w-full py-2 px-4 bg-violet-900 text-white font-semibold rounded-md shadow-md transition-all duration-300 ease-in-out relative overflow-hidden hover:shadow-lg hover:shadow-violet-600">
               Send
             </motion.button>

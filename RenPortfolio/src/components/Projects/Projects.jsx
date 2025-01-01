@@ -18,12 +18,15 @@ const Project = () => {
     const [isHovered, setIsHovered] = useState(false); // State to handle hover effect
 
     return (
-      <section className="bg-[#0c0429] h-screen flex items-center justify-center relative scroll-snap-align-center perspective-[500px]">
-        <div className="flex items-center justify-between w-full max-w-7xl px-5">
+      <section
+        id="Projects"
+        className="bg-[#0c0429] h-screen flex items-center justify-center relative scroll-snap-align-center perspective-[500px]"
+      >
+        <div className="flex items-center justify-center w-full max-w-7xl px-5">
           {/* Project image container */}
           <div
             ref={ref}
-            className="w-full sm:w-[300px] h-[400px] max-h-[90vh] relative bg-white overflow-hidden rounded-xl"
+            className="w-full sm:w-[350px] md:w-[450px] h-[350px] sm:h-[450px] max-h-[90vh] relative bg-white overflow-hidden rounded-xl"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -32,33 +35,33 @@ const Project = () => {
               alt="Project Image"
               className={`absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover transition-all duration-500 ${
                 isHovered ? "scale-105 shadow-lg shadow-blue-500" : ""
-              }`} // Hover effect for scaling and shadow
+              }`}
             />
           </div>
 
           {/* Project description */}
           <div className="text-white pl-5 w-full sm:w-1/2">
             <motion.h2
-              className="text-[32px] sm:text-[56px] font-bold -tracking-[3px] leading-[1.2] text-shadow"
+              className="text-[24px] sm:text-[32px] md:text-[56px] font-bold -tracking-[3px] leading-[1.2] text-shadow"
               style={{ y }} // Parallax effect for the title
             >
               {`#00${id}`} {/* Dynamic project ID */}
             </motion.h2>
-            <p className="mt-4 text-lg sm:text-xl">
+            <p className="mt-4 text-sm sm:text-lg md:text-xl">
               This project showcases a web application built using React and
               styled with Tailwind CSS. The project focuses on user interaction
               and modern web design.
             </p>
 
             {/* Tech stack badges */}
-            <div className="mt-6 flex gap-4 flex-wrap">
-              <div className="h-10 px-4 py-2 rounded-2xl text-white text-center bg-[#4D93FF80]">
+            <div className="mt-4 sm:mt-6 flex gap-2 sm:gap-4 flex-wrap">
+              <div className="h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
                 React
               </div>
-              <div className="h-10 px-4 py-2 rounded-2xl text-white text-center bg-[#4D93FF80]">
+              <div className="h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
                 Tailwind
               </div>
-              <div className="mb-6 h-10 px-4 py-2 rounded-2xl text-white text-center bg-[#4D93FF80]">
+              <div className="mb-4 sm:mb-6 h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
                 JavaScript
               </div>
             </div>
@@ -67,7 +70,7 @@ const Project = () => {
             <a
               href="https://github.com/your-project"
               target="_blank"
-              className="w-auto sm:w-32 px-4 py-2 bg-orange-700 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500"
+              className="w-auto sm:w-32 px-3 py-1 bg-orange-700 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500 text-xs sm:text-sm"
             >
               <span>GitHub</span>
               <img
@@ -85,18 +88,18 @@ const Project = () => {
   // Scroll animation progress for the fixed progress bar
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 120, // Adjust stiffness for smoother transition
+    damping: 25, // Reduce damping for quicker response
     restDelta: 0.001,
   });
 
   return (
     <div>
       {/* Section with a gradient background and moving text */}
-      <section className="pt-32 h-80 relative bg-gradient-to-t from-[#0a0825] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
+      <section className="pt-16 sm:pt-32 h-60 sm:h-80 relative bg-gradient-to-t from-[#0a0825] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
         {/* Moving background text */}
         <motion.div
-          className="absolute inset-0 flex items-center justify-start text-center text-white text-[64px] sm:text-[128px] font-bold opacity-10 whitespace-nowrap"
+          className="absolute inset-0 flex items-center justify-start text-center text-white text-[48px] sm:text-[64px] md:text-[128px] font-bold opacity-10 whitespace-nowrap"
           initial={{ x: "100%" }} // Start position outside the right edge
           animate={{ x: "-100%" }} // End position outside the left edge
           transition={{
@@ -110,7 +113,7 @@ const Project = () => {
 
         {/* Foreground title */}
         <motion.h1
-          className="relative text-white text-[32px] sm:text-[56px] font-bold text-shadow z-10"
+          className="relative text-white text-[24px] sm:text-[32px] md:text-[56px] font-bold text-shadow z-10"
           style={{
             y: useTransform(scrollYProgress, [0, 1], [0, 50]), // Move slightly up on scroll
           }}
