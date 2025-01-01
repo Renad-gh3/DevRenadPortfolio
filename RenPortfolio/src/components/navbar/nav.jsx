@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { HashLink as Link } from "react-router-hash-link";
 
@@ -6,6 +6,7 @@ const Nav = () => {
   const [open, setOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const navRef = useRef(null);
 
   const MenuIcon = () => (
     <svg
@@ -50,8 +51,19 @@ const Nav = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
+
+    // Close navbar if clicked outside
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       window.removeEventListener("scroll", controlNavbar);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [lastScrollY]);
 
@@ -75,12 +87,17 @@ const Nav = () => {
         </div>
 
         <ul
+          ref={navRef}
           className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-16 bg-black bg-opacity-90" : "top-[-490px]"
           }`}
         >
           {Links.map((link) => (
-            <li key={link.name} className="md:ml-8 text-xl md:my-0 my-7 group">
+            <li
+              key={link.name}
+              className="md:ml-8 text-xl md:my-0 my-7 group"
+              onClick={() => setOpen(false)} // Close nav when link is clicked
+            >
               <Link
                 smooth
                 to={link.link}
