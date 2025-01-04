@@ -20,7 +20,7 @@ const Footer = () => {
 
         {/* LinkedIn icon on the right */}
         <motion.a
-          href="https://www.linkedin.com"
+          href="https://www.linkedin.com/in/renad-alghamdi-621767249"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1 }} // Zoom in effect on hover

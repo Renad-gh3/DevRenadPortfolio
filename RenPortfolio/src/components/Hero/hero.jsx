@@ -39,8 +39,9 @@ const Hero = () => {
           className="text-center mt-6 text-lg sm:text-xl md:text-2xl text-white"
         >
           <p>
-            I am a passionate software engineer with a focus on web design and
-            UX/UI, dedicated to creating innovative and user-centered solutions.
+            A passionate software engineer focused on front-end development and
+            innovative UI design. I work hard to create unique projects, and who
+            knows one day, I might start my own software company ! 😉
           </p>
         </motion.div>
 
@@ -65,14 +66,15 @@ const Hero = () => {
         {/* CV download button with hover effect and initial animation */}
         <div className="text-center mt-8">
           <motion.a
-            href="/"
-            download
+            href="https://www.linkedin.com/in/renad-alghamdi-621767249"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-transparent text-white py-2 px-6 sm:py-3 sm:px-8 md:py-3 md:px-10 border-2 border-white rounded-md hover:bg-white hover:text-black hover:shadow-lg hover:scale-105 transition-all duration-300"
             initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move from bottom
             animate={{ opacity: 1, y: 0 }} // Move to its normal position with full opacity
             transition={{ duration: 1.5, delay: 1.5 }} // Smooth transition with delay
           >
-            Browse My CV
+            Let’s Connect on LinkedIn
           </motion.a>
         </div>
       </div>

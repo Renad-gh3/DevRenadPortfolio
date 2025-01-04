@@ -54,9 +54,10 @@ const Collaborations = () => {
               transition={{ duration: 0.6 }}
             >
               <p>
-                Collaborated with Dawai to improve their healthcare app,
-                creating a seamless and user-friendly experience for patients
-                and doctors.
+                collaborating with Dawai to develop a specialized dashboard for
+                drug safety, using advanced technologies to monitor and enhance
+                medication safety, providing real-time insights and improving
+                patient safety
               </p>
             </motion.div>
             <div className="mt-8 flex gap-6 flex-wrap justify-center">
@@ -66,7 +67,7 @@ const Collaborations = () => {
                 transition={{ duration: 0.3 }}
               >
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/dawaime/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -84,7 +85,7 @@ const Collaborations = () => {
                 transition={{ duration: 0.3 }}
               >
                 <a
-                  href="https://x.com"
+                  href="https://x.com/Dawai_sa"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -121,8 +122,10 @@ const Collaborations = () => {
               transition={{ duration: 0.6 }}
             >
               <p>
-                Worked with AI Club on enhancing their AI-based platform,
-                focusing on user experience and interface design.
+                collaborating with the AI Club at Jeddah University to develop
+                their official website, which highlights the club's activities,
+                workshops, and events, providing members with valuable resources
+                in the AI field
               </p>
             </motion.div>
             <div className="mt-8 flex gap-6 flex-wrap justify-center">
@@ -132,31 +135,13 @@ const Collaborations = () => {
                 transition={{ duration: 0.3 }}
               >
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/ai-club-at-ujj/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
                     src={linked}
                     alt="LinkedIn"
-                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
-                  />
-                </a>
-              </motion.div>
-
-              <motion.div
-                className="h-10 px-4 py-2 rounded-2xl text-white text-center flex justify-center items-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={X}
-                    alt="X"
                     className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
                   />
                 </a>
@@ -187,8 +172,11 @@ const Collaborations = () => {
               transition={{ duration: 0.6 }}
             >
               <p>
-                Partnered with Synapse to design intuitive web interfaces,
-                focusing on accessibility and user engagement.
+                collaborating with Synapse, a non-profit organization under the
+                supervision of SDAIA, to develop their official website. The
+                site will highlight the organization’s events, initiatives, and
+                educational resources, providing valuable support to the
+                community in the fields of AI and data
               </p>
             </motion.div>
             <div className="mt-8 flex gap-6 flex-wrap justify-center">
@@ -198,25 +186,7 @@ const Collaborations = () => {
                 transition={{ duration: 0.3 }}
               >
                 <a
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={linked}
-                    alt="LinkedIn"
-                    className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
-                  />
-                </a>
-              </motion.div>
-
-              <motion.div
-                className="h-10 px-4 py-2 rounded-2xl text-white text-center flex justify-center items-center"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <a
-                  href="https://x.com"
+                  href="https://x.com/SynapseKSA"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

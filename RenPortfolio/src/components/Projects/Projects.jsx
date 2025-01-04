@@ -1,14 +1,15 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import vitafit from "../../assets/icon/vitafit.png";
-import pro from "../../assets/icon/project.png";
+import pro from "../../assets/icon/pro.jpg";
 import skinwhisper from "../../assets/icon/skinwhisper.png";
 import openarrow from "../../assets/icon/openarrow.svg";
 import AI from "../../assets/icon/AI.png";
 import syn from "../../assets/icon/syn.png";
+import X from "../../assets/icon/x.svg";
 
 const Project = () => {
-  // Function to determine badge color based on status
+  // Function to determine badge color based on project status
   const getStatusColor = (status) => {
     switch (status) {
       case "Completed":
@@ -22,6 +23,7 @@ const Project = () => {
     }
   };
 
+  // Parallax effect function for scroll movement
   function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
   }
@@ -34,6 +36,8 @@ const Project = () => {
     link,
     buttonLabel,
     status,
+    extraLink,
+    extraButtonLabel, // New prop for additional link (Twitter)
   }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
@@ -82,6 +86,7 @@ const Project = () => {
               ))}
             </div>
 
+            {/* Primary Button (GitHub, Figma, etc.) */}
             <a
               href={status === "Coming Soon" ? "#" : link}
               target={status === "Coming Soon" ? "_self" : "_blank"}
@@ -101,6 +106,21 @@ const Project = () => {
                 className="w-4 h-4 stroke-white"
               />
             </a>
+
+            {/* Additional Button (X Link for Project 3) */}
+            {status === "Completed" && extraLink && (
+              <a
+                href={extraLink}
+                target="_blank"
+                className="w-auto h-7 sm:w-32 px-3 py-1 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 text-xs sm:text-sm mt-4 bg-[#404040] hover:shadow-lg hover:shadow-[#7e7e7e]"
+              >
+                <img
+                  src={X} // X Icon
+                  alt="X Icon"
+                  className="w-4 h-4"
+                />
+              </a>
+            )}
           </motion.div>
         </div>
       </section>
@@ -119,9 +139,9 @@ const Project = () => {
       id: 1,
       imageSrc: skinwhisper,
       description:
-        "An e-commerce platform offering seamless shopping experiences.",
-      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
-      link: "https://github.com/skinwhisper",
+        "Skin Whisper is a full-stack platform that offers personalized skincare routines, product recommendations, and a seamless shopping experience based on skin type and concerns.",
+      techStack: ["React.js", "CSS", "MongoDB"],
+      link: "https://github.com/Renad-gh3/SkinWisper",
       buttonLabel: "GitHub",
       status: "In Progress",
     },
@@ -129,35 +149,39 @@ const Project = () => {
       id: 2,
       imageSrc: vitafit,
       description:
-        "A fitness tracking application built with React and Tailwind CSS.",
+        "VitaFit is an all-in-one health app that helps users schedule gyms, order healthy meals, arrange transportation, access health advice, and provides daycare services for mothers.",
       techStack: [],
-      link: "https://github.com/vitafit",
+      link: "https://www.figma.com/design/wnASKB85fc4RUHV6cNjDUo/VitaFit?node-id=0-1&t=JnRNcRexyn3EvNf6-1",
       buttonLabel: "Figma",
       status: "Completed",
     },
     {
       id: 3,
       imageSrc: pro,
-      description: "A project management tool designed for team collaboration.",
-      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
-      link: "https://www.figma.com/pro-management",
+      description:
+        "Basira Al-Maliya is an API for the visually impaired, providing voice navigation, AI text reading, and security features like voice recognition and AI-driven fraud detection for secure financial management.",
+      techStack: [],
+      link: "https://www.figma.com/design/09uLj4y8MNae3oEqXTw7pp/Basira-Maliyah-(Portfolio)?node-id=0-1&t=caSiWpM6HccQTxZM-1",
       buttonLabel: "Figma",
       status: "Completed",
+      extraLink: "https://x.com/BasiraMaliya", // New link for X
     },
     {
       id: 4,
       imageSrc: AI,
-      description: "A project management tool designed for team collaboration.",
-      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
-      link: "https://www.figma.com/pro-management",
+      description:
+        "AI Club at Jeddah University is a platform showcasing the club’s vision, structure, and goals. It highlights AI workshops, activities, and events aimed at enhancing students' skills and engagement in the AI field.",
+      techStack: ["HTML", "CSS", "JavaScript"],
+      link: "/",
       buttonLabel: "Website",
       status: "Coming Soon",
     },
     {
       id: 5,
       imageSrc: syn,
-      description: "A project management tool designed for team collaboration.",
-      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+      description:
+        "Synapse is a non-profit organization under SDAIA. Their website showcases events, educational resources, courses, and initiatives that benefit the community and promote engagement.",
+      techStack: ["HTML", "CSS", "JavaScript"],
       link: "https://www.figma.com/pro-management",
       buttonLabel: "Website",
       status: "Coming Soon",
@@ -200,6 +224,8 @@ const Project = () => {
           link={project.link}
           buttonLabel={project.buttonLabel}
           status={project.status}
+          extraLink={project.extraLink} // Pass the extra link prop for Twitter
+          extraButtonLabel={project.extraButtonLabel} // Pass the extra button label prop for Twitter
         />
       ))}
 
