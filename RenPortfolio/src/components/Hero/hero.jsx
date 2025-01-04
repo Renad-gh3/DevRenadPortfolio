@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import lamp from "../../assets/icon/lamp.png";
+import linked from "../../assets/icon/linkedin.svg"; // تأكد من استيراد شعار LinkedIn
 
 const Hero = () => {
   return (
@@ -63,18 +64,22 @@ const Hero = () => {
           />
         </motion.div>
 
-        {/* CV download button with hover effect and initial animation */}
+        {/* LinkedIn button with hover effect and initial animation */}
         <div className="text-center mt-8">
           <motion.a
             href="https://www.linkedin.com/in/renad-alghamdi-621767249"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-transparent text-white py-2 px-6 sm:py-3 sm:px-8 md:py-3 md:px-10 border-2 border-white rounded-md hover:bg-white hover:text-black hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="bg-transparent text-white py-2 px-6 sm:py-3 sm:px-8 md:py-3 md:px-10 border-2 border-white rounded-md 
+            hover:shadow-[0px_4px_15px_2px_rgba(255,255,255,0.3)] 
+            hover:scale-105 transition-all duration-300 inline-flex items-center justify-center gap-2"
             initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move from bottom
             animate={{ opacity: 1, y: 0 }} // Move to its normal position with full opacity
             transition={{ duration: 1.5, delay: 1.5 }} // Smooth transition with delay
           >
-            Let’s Connect on LinkedIn
+            {/* LinkedIn logo and text */}
+            <span>Let’s Connect</span>
+            <img src={linked} alt="LinkedIn" className="ml-1 w-6 h-6" />
           </motion.a>
         </div>
       </div>
