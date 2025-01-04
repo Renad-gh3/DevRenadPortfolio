@@ -1,21 +1,43 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import vitafit from "../../assets/icon/vitafit.png";
 import pro from "../../assets/icon/project.png";
+import skinwhisper from "../../assets/icon/skinwhisper.png";
 import openarrow from "../../assets/icon/openarrow.svg";
+import AI from "../../assets/icon/AI.png";
+import syn from "../../assets/icon/syn.png";
 
 const Project = () => {
-  // Parallax function to create a vertical movement effect
+  // Function to determine badge color based on status
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Completed":
+        return "bg-lime-600"; // Green for completed
+      case "In Progress":
+        return "bg-orange-500"; // Orange for in progress
+      case "Coming Soon":
+        return "bg-gray-500"; // Gray for coming soon
+      default:
+        return "bg-blue-500"; // Default color
+    }
+  };
+
   function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
   }
 
-  // Image component to represent individual project cards
-  function Image({ id }) {
-    const ref = useRef(null); // Reference for tracking scroll progress
-    const { scrollYProgress } = useScroll({ target: ref }); // Get scroll progress for the specific element
-    const y = useParallax(scrollYProgress, 300); // Parallax effect for vertical translation
-
-    const [isHovered, setIsHovered] = useState(false); // State to handle hover effect
+  function Image({
+    id,
+    imageSrc,
+    description,
+    techStack,
+    link,
+    buttonLabel,
+    status,
+  }) {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref });
+    const y = useParallax(scrollYProgress, 300);
 
     return (
       <section
@@ -23,116 +45,169 @@ const Project = () => {
         className="bg-[#0c0429] h-screen flex items-center justify-center relative scroll-snap-align-center perspective-[500px]"
       >
         <div className="flex items-center justify-center w-full max-w-7xl px-5">
-          {/* Project image container */}
           <div
             ref={ref}
-            className="w-full sm:w-[350px] md:w-[450px] h-[350px] sm:h-[450px] max-h-[90vh] relative bg-white overflow-hidden rounded-xl"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            className="relative w-full sm:w-[350px] md:w-[450px] h-[350px] sm:h-[450px] max-h-[90vh] bg-white overflow-hidden rounded-xl"
           >
             <img
-              src={pro}
-              alt="Project Image"
-              className={`absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover transition-all duration-500 ${
-                isHovered ? "scale-105 shadow-lg shadow-blue-500" : ""
-              }`}
+              src={imageSrc}
+              alt={`Project ${id}`}
+              className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
             />
+
+            {/* Status Badge */}
+            <div
+              className={`absolute top-5 right-0 ${getStatusColor(
+                status
+              )} text-white text-xs sm:text-sm px-4 py-1 rounded-l-full shadow-md z-10`}
+            >
+              {status}
+            </div>
           </div>
 
-          {/* Project description */}
-          <div className="text-white pl-5 w-full sm:w-1/2">
-            <motion.h2
-              className="text-[24px] sm:text-[32px] md:text-[56px] font-bold -tracking-[3px] leading-[1.2] text-shadow"
-              style={{ y }} // Parallax effect for the title
-            >
-              {`#00${id}`} {/* Dynamic project ID */}
+          <motion.div className="text-white pl-5 w-full sm:w-1/2" style={{ y }}>
+            <motion.h2 className="text-[24px] sm:text-[32px] md:text-[56px] font-bold -tracking-[3px] leading-[1.2] text-shadow">
+              {`#00${id}`}
             </motion.h2>
-            <p className="mt-4 text-sm sm:text-lg md:text-xl">
-              This project showcases a web application built using React and
-              styled with Tailwind CSS. The project focuses on user interaction
-              and modern web design.
-            </p>
+            <p className="mt-4 text-sm sm:text-lg md:text-xl">{description}</p>
 
-            {/* Tech stack badges */}
             <div className="mt-4 sm:mt-6 flex gap-2 sm:gap-4 flex-wrap">
-              <div className="h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
-                React
-              </div>
-              <div className="h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
-                Tailwind
-              </div>
-              <div className="mb-4 sm:mb-6 h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center">
-                JavaScript
-              </div>
+              {techStack.map((tech, index) => (
+                <div
+                  key={index}
+                  className="h-8 sm:h-10 px-3 sm:px-4 py-2 sm:py-2 rounded-2xl text-white text-center bg-[#4D93FF80] text-xs sm:text-sm flex items-center justify-center"
+                >
+                  {tech}
+                </div>
+              ))}
             </div>
 
-            {/* Link to GitHub */}
             <a
-              href="https://github.com/your-project"
-              target="_blank"
-              className="w-auto sm:w-32 px-3 py-1 bg-orange-700 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500 text-xs sm:text-sm"
+              href={status === "Coming Soon" ? "#" : link}
+              target={status === "Coming Soon" ? "_self" : "_blank"}
+              className={`w-auto h-7 sm:w-32 px-3 py-1 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 text-xs sm:text-sm mt-4 ${
+                status === "Coming Soon"
+                  ? "bg-gray-500 cursor-not-allowed opacity-50"
+                  : "bg-orange-700 hover:shadow-lg hover:shadow-orange-500"
+              }`}
+              onClick={(e) => {
+                if (status === "Coming Soon") e.preventDefault();
+              }}
             >
-              <span>GitHub</span>
+              <span>{buttonLabel}</span>
               <img
                 src={openarrow}
                 alt="Open Arrow"
                 className="w-4 h-4 stroke-white"
               />
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
     );
   }
 
-  // Scroll animation progress for the fixed progress bar
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120, // Adjust stiffness for smoother transition
-    damping: 25, // Reduce damping for quicker response
+    stiffness: 120,
+    damping: 25,
     restDelta: 0.001,
   });
 
+  const projects = [
+    {
+      id: 1,
+      imageSrc: skinwhisper,
+      description:
+        "An e-commerce platform offering seamless shopping experiences.",
+      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+      link: "https://github.com/skinwhisper",
+      buttonLabel: "GitHub",
+      status: "In Progress",
+    },
+    {
+      id: 2,
+      imageSrc: vitafit,
+      description:
+        "A fitness tracking application built with React and Tailwind CSS.",
+      techStack: [],
+      link: "https://github.com/vitafit",
+      buttonLabel: "Figma",
+      status: "Completed",
+    },
+    {
+      id: 3,
+      imageSrc: pro,
+      description: "A project management tool designed for team collaboration.",
+      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+      link: "https://www.figma.com/pro-management",
+      buttonLabel: "Figma",
+      status: "Completed",
+    },
+    {
+      id: 4,
+      imageSrc: AI,
+      description: "A project management tool designed for team collaboration.",
+      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+      link: "https://www.figma.com/pro-management",
+      buttonLabel: "Website",
+      status: "Coming Soon",
+    },
+    {
+      id: 5,
+      imageSrc: syn,
+      description: "A project management tool designed for team collaboration.",
+      techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
+      link: "https://www.figma.com/pro-management",
+      buttonLabel: "Website",
+      status: "Coming Soon",
+    },
+  ];
+
   return (
     <div>
-      {/* Section with a gradient background and moving text */}
       <section className="pt-16 sm:pt-32 h-60 sm:h-80 relative bg-gradient-to-t from-[#0a0825] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
-        {/* Moving background text */}
         <motion.div
           className="absolute inset-0 flex items-center justify-start text-center text-white text-[48px] sm:text-[64px] md:text-[128px] font-bold opacity-10 whitespace-nowrap"
-          initial={{ x: "100%" }} // Start position outside the right edge
-          animate={{ x: "-100%" }} // End position outside the left edge
+          initial={{ x: "100%" }}
+          animate={{ x: "-100%" }}
           transition={{
-            repeat: Infinity, // Infinite looping
-            duration: 10, // Duration for the complete cycle
-            ease: "linear", // Smooth and constant movement
+            repeat: Infinity,
+            duration: 10,
+            ease: "linear",
           }}
         >
           My Projects My Projects My Projects My Projects
         </motion.div>
 
-        {/* Foreground title */}
         <motion.h1
           className="relative text-white text-[24px] sm:text-[32px] md:text-[56px] font-bold text-shadow z-10"
           style={{
-            y: useTransform(scrollYProgress, [0, 1], [0, 50]), // Move slightly up on scroll
+            y: useTransform(scrollYProgress, [0, 1], [0, 50]),
           }}
         >
           My Projects
         </motion.h1>
       </section>
 
-      {/* Project cards */}
-      {[1, 2, 3, 4, 5].map((image, index) => (
-        <Image key={image} id={image} />
+      {projects.map((project) => (
+        <Image
+          key={project.id}
+          id={project.id}
+          imageSrc={project.imageSrc}
+          description={project.description}
+          techStack={project.techStack}
+          link={project.link}
+          buttonLabel={project.buttonLabel}
+          status={project.status}
+        />
       ))}
 
-      {/* Fixed progress bar */}
       <motion.div
         className="fixed left-0 right-0 h-[5px] bg-white bottom-[100px]"
         style={{
           scaleX,
-          opacity: useTransform(scrollYProgress, [0.95, 1], [1, 0]), // Fade out as scroll reaches the end
+          opacity: useTransform(scrollYProgress, [0.95, 1], [1, 0]),
         }}
       />
     </div>

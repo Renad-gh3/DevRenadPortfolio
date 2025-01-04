@@ -34,13 +34,13 @@ const Skills = () => {
       >
         {/* Logo animation */}
         <motion.div
-          className="absolute inset-0 flex items-center justify-start text-center text-white text-[32px] sm:text-[64px] font-bold opacity-10 whitespace-nowrap"
-          initial={{ x: "100%" }}
-          animate={{ x: "-100%" }}
+          className="absolute inset-0 flex items-center justify-start text-center text-white text-[48px] sm:text-[64px] md:text-[128px] font-bold opacity-10 whitespace-nowrap"
+          initial={{ x: "100%" }} // Start position outside the right edge
+          animate={{ x: "-100%" }} // End position outside the left edge
           transition={{
-            repeat: Infinity,
-            duration: 15, // Slower animation (increased duration)
-            ease: "linear",
+            repeat: Infinity, // Infinite looping
+            duration: 10, // Duration for the complete cycle
+            ease: "linear", // Smooth and constant movement
           }}
         >
           programming skill programming skill
