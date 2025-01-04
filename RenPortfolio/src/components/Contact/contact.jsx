@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import "../../index.css";
+
 const Contact = () => {
   const form = useRef();
   const [showNotification, setShowNotification] = useState(false);
@@ -61,10 +62,8 @@ const Contact = () => {
 
   return (
     <div id="contact" className="relative">
-      {/* Background with glowing dots */}
-      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[#000000] via-[#0c0429] to-[#3f4078] overflow-hidden">
-        <div className="glowing-dots"></div>
-      </div>
+      {/* Background without glowing dots */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-b from-[#000000] via-[#0c0429] to-[#3f4078] overflow-hidden"></div>
 
       {/* Section for the title */}
       <section className="h-80 pt-32 relative bg-gradient-to-b from-[#0c0429] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">

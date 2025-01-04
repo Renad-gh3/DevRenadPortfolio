@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Link } from "react-scroll"; // لاستخدام التمرير التلقائي
 import vitafit from "../../assets/icon/vitafit.png";
 import pro from "../../assets/icon/pro.jpg";
 import skinwhisper from "../../assets/icon/skinwhisper.png";
@@ -9,21 +10,19 @@ import syn from "../../assets/icon/syn.png";
 import X from "../../assets/icon/x.svg";
 
 const Project = () => {
-  // Function to determine badge color based on project status
   const getStatusColor = (status) => {
     switch (status) {
       case "Completed":
-        return "bg-lime-600"; // Green for completed
+        return "bg-lime-600";
       case "In Progress":
-        return "bg-orange-500"; // Orange for in progress
+        return "bg-orange-500";
       case "Coming Soon":
-        return "bg-gray-500"; // Gray for coming soon
+        return "bg-gray-500";
       default:
-        return "bg-blue-500"; // Default color
+        return "bg-blue-500";
     }
   };
 
-  // Parallax effect function for scroll movement
   function useParallax(value, distance) {
     return useTransform(value, [0, 1], [-distance, distance]);
   }
@@ -37,7 +36,6 @@ const Project = () => {
     buttonLabel,
     status,
     extraLink,
-    extraButtonLabel, // New prop for additional link (Twitter)
   }) {
     const ref = useRef(null);
     const { scrollYProgress } = useScroll({ target: ref });
@@ -45,21 +43,20 @@ const Project = () => {
 
     return (
       <section
-        id="Projects"
-        className="bg-[#0c0429] h-screen flex items-center justify-center relative scroll-snap-align-center perspective-[500px]"
+        id={`project-${id}`}
+        className="relative h-[70vh] flex bg-[#0c0429] items-center justify-center "
       >
-        <div className="flex items-center justify-center w-full max-w-7xl px-5">
-          <div
-            ref={ref}
-            className="relative w-full sm:w-[350px] md:w-[450px] h-[350px] sm:h-[450px] max-h-[90vh] bg-white overflow-hidden rounded-xl"
-          >
+        <motion.div
+          ref={ref}
+          className="flex items-center justify-center w-full max-w-7xl px-5"
+          style={{ y }}
+        >
+          <motion.div className="relative w-full sm:w-[350px] md:w-[450px] h-[350px] sm:h-[450px] max-h-[90vh] bg-white overflow-hidden rounded-xl">
             <img
               src={imageSrc}
               alt={`Project ${id}`}
               className="absolute top-0 left-0 right-0 bottom-0 w-full h-full object-cover"
             />
-
-            {/* Status Badge */}
             <div
               className={`absolute top-5 right-0 ${getStatusColor(
                 status
@@ -67,9 +64,9 @@ const Project = () => {
             >
               {status}
             </div>
-          </div>
+          </motion.div>
 
-          <motion.div className="text-white pl-5 w-full sm:w-1/2" style={{ y }}>
+          <motion.div className="text-white pl-5 w-full sm:w-1/2">
             <motion.h2 className="text-[24px] sm:text-[32px] md:text-[56px] font-bold -tracking-[3px] leading-[1.2] text-shadow">
               {`#00${id}`}
             </motion.h2>
@@ -86,7 +83,6 @@ const Project = () => {
               ))}
             </div>
 
-            {/* Primary Button (GitHub, Figma, etc.) */}
             <a
               href={status === "Coming Soon" ? "#" : link}
               target={status === "Coming Soon" ? "_self" : "_blank"}
@@ -107,22 +103,17 @@ const Project = () => {
               />
             </a>
 
-            {/* Additional Button (X Link for Project 3) */}
             {status === "Completed" && extraLink && (
               <a
                 href={extraLink}
                 target="_blank"
                 className="w-auto h-7 sm:w-32 px-3 py-1 rounded-2xl text-white flex items-center justify-center gap-2 transition-all duration-300 text-xs sm:text-sm mt-4 bg-[#404040] hover:shadow-lg hover:shadow-[#7e7e7e]"
               >
-                <img
-                  src={X} // X Icon
-                  alt="X Icon"
-                  className="w-4 h-4"
-                />
+                <img src={X} alt="X Icon" className="w-4 h-4" />
               </a>
             )}
           </motion.div>
-        </div>
+        </motion.div>
       </section>
     );
   }
@@ -189,7 +180,8 @@ const Project = () => {
   ];
 
   return (
-    <div>
+    <div style={{ scrollBehavior: "smooth" }} className="bg-red-500">
+      {" "}
       <section className="pt-16 sm:pt-32 h-60 sm:h-80 relative bg-gradient-to-t from-[#0a0825] via-[#0c0429] to-[#3f4078] flex justify-center items-center overflow-hidden">
         <motion.div
           className="absolute inset-0 flex items-center justify-start text-center text-white text-[48px] sm:text-[64px] md:text-[128px] font-bold opacity-10 whitespace-nowrap"
@@ -213,7 +205,6 @@ const Project = () => {
           My Projects
         </motion.h1>
       </section>
-
       {projects.map((project) => (
         <Image
           key={project.id}
@@ -224,11 +215,9 @@ const Project = () => {
           link={project.link}
           buttonLabel={project.buttonLabel}
           status={project.status}
-          extraLink={project.extraLink} // Pass the extra link prop for Twitter
-          extraButtonLabel={project.extraButtonLabel} // Pass the extra button label prop for Twitter
+          extraLink={project.extraLink}
         />
       ))}
-
       <motion.div
         className="fixed left-0 right-0 h-[5px] bg-white bottom-[100px]"
         style={{
