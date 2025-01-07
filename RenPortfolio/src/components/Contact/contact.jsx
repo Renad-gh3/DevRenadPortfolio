@@ -8,22 +8,22 @@ const Contact = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [errors, setErrors] = useState({
     user_name: "",
-    user_email: "",
+    user_Email: "",
     message: "",
   });
 
   const validateForm = () => {
-    const newErrors = { user_name: "", user_email: "", message: "" };
+    const newErrors = { user_name: "", user_Email: "", message: "" };
 
     if (!form.current.user_name.value) {
       newErrors.user_name = "Name is required";
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.current.user_email.value) {
-      newErrors.user_email = "Email is required";
-    } else if (!emailPattern.test(form.current.user_email.value)) {
-      newErrors.user_email = "Please enter a valid email address";
+    if (!form.current.user_Email.value) {
+      newErrors.user_Email = "Email is required";
+    } else if (!emailPattern.test(form.current.user_Email.value)) {
+      newErrors.user_Email = "Please enter a valid email address";
     }
 
     if (!form.current.message.value) {
@@ -103,14 +103,14 @@ const Contact = () => {
 
             <div>
               <input
-                type="email"
-                id="email"
-                name="user_email"
-                placeholder="Your email"
+                type="Email"
+                id="Email"
+                name="user_Email"
+                placeholder="Your Email"
                 className="w-full p-3 border border-purple-300 rounded-md text-white placeholder-gray-500 bg-transparent ring-2 ring-purple-200"
               />
-              {errors.user_email && (
-                <p className="text-white text-xs mt-1">{errors.user_email}</p>
+              {errors.user_Email && (
+                <p className="text-white text-xs mt-1">{errors.user_Email}</p>
               )}
             </div>
 

@@ -37,12 +37,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }} // Start from bottom with opacity 0
           animate={{ opacity: 1, y: 0 }} // Move to its normal position with full opacity
           transition={{ duration: 1.5, delay: 1 }} // Delay for smooth transition
-          className="text-center mt-6 text-lg sm:text-xl md:text-2xl text-white"
+          className="text-center mt-6 text-lg sm:text-l md:text-2xl text-white"
         >
           <p>
             A passionate software engineer focused on front-end development and
             innovative UI design. I work hard to create unique projects, and who
-            knows one day, I might start my own software company ! 😉
+            knows one day, I might start my own software company !
           </p>
         </motion.div>
 
